@@ -8,6 +8,7 @@ import MainStory from "../MainStory";
 import SecondaryStory from "../SecondaryStory";
 import OpinionStory from "../OpinionStory";
 import Advertisement from "../Advertisement";
+import { QUERIES } from "../../constants";
 
 const MainStoryGrid = () => {
   return (
@@ -28,13 +29,13 @@ const MainStoryGrid = () => {
 
       <OpinionSection>
         <SectionTitle>Opinion</SectionTitle>
-        <StoryList>
+        <OpinionStoryList>
           {OPINION_STORIES.map((story, index) => (
-            <VerticalStoryWrapper>
+            <OpinionStoryWrapper>
               <OpinionStory key={story.id} {...story} />
-            </VerticalStoryWrapper>
+            </OpinionStoryWrapper>
           ))}
-        </StoryList>
+        </OpinionStoryList>
       </OpinionSection>
 
       <AdvertisementSection>
@@ -49,6 +50,17 @@ const VerticalStoryWrapper = styled.div`
     border-bottom: 1px solid var(--color-gray-300);
     padding-bottom: 16px;
     margin-bottom: 16px;
+  }
+`;
+
+const OpinionStoryWrapper = styled(VerticalStoryWrapper)`
+  @media ${QUERIES.tabletOnly} {
+    &:not(:last-child) {
+      border-bottom: revert;
+      padding-bottom: revert;
+      margin-bottom: revert;
+    }
+    flex: 1;
   }
 `;
 
@@ -74,6 +86,12 @@ const SecondaryStorySection = styled.section`
 const StoryList = styled.div`
   display: flex;
   flex-direction: column;
+`;
+
+const OpinionStoryList = styled(StoryList)`
+  @media ${QUERIES.tabletOnly} {
+    flex-direction: row;
+  }
 `;
 
 const OpinionSection = styled.section`
